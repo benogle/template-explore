@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle template-explore'
+      'command': 'template-explore:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'template-explore'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'template-explore:toggle'
+        }
+      ]
+    ]
+  }
+]
