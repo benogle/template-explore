@@ -16,3 +16,13 @@ class TemplateExploreModel
 
   clicked: ->
     @buttonClicks++
+
+  numToWords: (value) ->
+    convert =
+      0: 'none'
+      1: 'one'
+      2: 'two'
+      3: 'three'
+      4: 'four'
+      5: 'five'
+    convert[value] ? value

@@ -1,15 +1,29 @@
 <template bind="{{}}">
-  <h3>Property Binding</h3>
+  <h2>Property Binding</h2>
   <div>
     {{ buttonMessage }}
-    {{ buttonClicks }}
+    {{ buttonClicks == 0 ? 'never' : buttonClicks }}
     <button class="btn btn-inc">Click Me</button>
   </div>
 
-  <h3>Repeating</h3>
+  <div>
+    Clicks in words: <strong>{{ buttonClicks | numToWords }}</strong>
+  </div>
+
+  <div>
+    tokenList {{ {active: true, hasClicks: buttonClicks > 0} | tokenList}}
+  <div>
+
+  <h2>Repeating</h2>
   <div> List one:
     <template repeat="{{ things }}">
       <span class="name">{{ name }}</span>,
+    </template>
+  </div>
+
+  <div> List named looping:
+    <template repeat="{{ thing in things }}">
+      <span class="name">{{ thing.name }}</span>,
     </template>
   </div>
 
@@ -24,7 +38,7 @@
     </template>
   </table>
 
-  <h3>Conditionals</h3>
+  <h2>Conditionals</h2>
   <label>Toggle? <input type="checkbox" checked="{{ showTheThing }}"></label>
 
   <template if="{{ showTheThing }}">
