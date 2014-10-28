@@ -27,6 +27,14 @@
     </template>
   </div>
 
+  <div> Indexed looping:
+    <template repeat="{{ thing, i in things }}">
+      <span class="name">{{i}}:{{ thing.name }}</span>,
+    </template>
+  </div>
+
+  <h2>Repeating in a table</h2>
+  <p>Does not require the <code>&lt;tr template</code> syntax!</p>
   <table>
     <tr>
       <template repeat="{{ things }}">
@@ -39,11 +47,14 @@
   </table>
 
   <h2>Conditionals</h2>
-  <label>Toggle? <input type="checkbox" checked="{{ showTheThing }}"></label>
+  <label>Show them? <input type="checkbox" checked="{{ showTheThing }}"></label>
 
   <template if="{{ showTheThing }}">
     <div>Shown via `if`</div>
   </template>
 
-  <div hidden?="{{ showTheThing }}">Hidden via conditional attr</div>
+  <div hidden?="{{ !showTheThing }}">Via `hidden` conditional attr</div>
+
+  <div class="{{ {'should-hide': !showTheThing} | tokenList}}">Via `tokenList` filter on class</div>
+
 </template>
