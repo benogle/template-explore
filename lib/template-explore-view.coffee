@@ -9,7 +9,10 @@ TemplateExploreElement = registerElement 'template-explore',
   createdCallback: ->
     @appendChild(Template.clone())
     @rootTemplate = @querySelector('template')
-    @classList.add 'tool-panel', 'panel-bottom', 'padded'
+    @classList.add 'tool-panel', 'panel-right', 'padded'
+
+    @addEventListener 'click', (e) =>
+      @model.clicked() if e.target.matches('button')
 
   getModel: -> @model
   setModel: (@model) ->

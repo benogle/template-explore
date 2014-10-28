@@ -3,7 +3,8 @@
 Can it handle?
 
 * [x] Binding to properties
+* [x] Repeating things
+* [x] Conditionals
 * [ ] Calling methods
-* [ ] Repeating things
-* [ ] Conditionals
+* [ ] Conditionally apply classes?
 * [ ] Custom bindings?

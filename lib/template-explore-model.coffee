@@ -1,4 +1,18 @@
 module.exports =
 class TemplateExploreModel
-  message: 'Find in Buffer'
+  buttonMessage: 'Clicked'
+  buttonClicks: 0
+
+  showTheThing: false
+
+  things: [
+    {name: 'one'}
+    {name: 'two'}
+    {name: 'three'}
+    {name: 'four'}
+  ]
+
   constructor: ->
+
+  clicked: ->
+    @buttonClicks++
