@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "event-kit": "^0.7",
-    "elmer": "^0.0"
+    "elmer": "^0.0",
+    "space-pen": "^3.8"
   }
 }
