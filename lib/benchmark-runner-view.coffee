@@ -11,3 +11,6 @@ BenchmarkRunnerElement = registerElement 'benchmark-runner',
 
     @addEventListener 'click', (e) ->
       Benchmarks.elementCreation() if e.target.matches('.btn-element-creation')
+
+    @addEventListener 'click', (e) ->
+      Benchmarks.setText() if e.target.matches('.btn-set-text')

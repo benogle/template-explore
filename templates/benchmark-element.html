@@ -1,7 +1,7 @@
 <template bind="{{}}">
   <div>
     <h2>Some Heading</h2>
-    <div>Raw Text {{ text }}</div>
+    <div class='raw'>Raw Text {{ text }}</div>
     <div>Filtered Text {{ text | filterText }}</div>
     <div class="{{ {'should-hide': !shown} | tokenList}}">`tokenList` filter on class</div>
   </div>

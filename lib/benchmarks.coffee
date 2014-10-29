@@ -61,12 +61,15 @@ BenchmarkElement = registerElement 'benchmark-element',
   toggle: ->
     @model.toggle()
 
-Template = require '../templates/benchmark-element.html'
+
+
 BenchmarkNoModelElement = registerElement 'benchmark-element-no-model',
   createdCallback: ->
     content = Template.clone().querySelector('template').content
     node = document.importNode(content, true)
     @appendChild(node)
+
+
 
 module.exports =
 class Benchmarks
@@ -118,3 +121,76 @@ class Benchmarks
 
     # console.profileEnd(name)
     console.timeEnd(name)
+
+  @setText: ->
+    @setTextSpacePen()
+    @setTextTemplate()
+    @setTextTemplateSerial()
+
+  @setTextSpacePen: ->
+    name = 'Set text benchmark: space-pen'
+    root = atom.workspaceView
+
+    model = new BenchmarkModel()
+    element = new BenchmarkView(model)
+    root.append(element)
+
+    console.time(name)
+    for i in [0..1000]
+      element.updateText()
+    console.timeEnd(name)
+
+    element.remove()
+
+  @setTextTemplate: ->
+    name = 'Set text benchmark: template bindings'
+    root = atom.views.getView(atom.workspace)
+
+    # Note: This is strictly not the same as the space pen test.
+    # Object.observe batches them up, and will call the observe callback with
+    # all changes.
+
+    model = new BenchmarkModel()
+    element = atom.views.getView(model)
+    root.appendChild(element)
+    element.rootTemplate.setModelFn_()
+
+    n = 1000
+    numChanges = 0
+    Object.observe model, (changes) ->
+      numChanges += changes.length
+      endIt() if numChanges >= n
+
+    endIt = ->
+      console.timeEnd(name)
+      root.removeChild(element)
+
+    console.time(name)
+    for i in [0..n]
+      element.updateText()
+
+  @setTextTemplateSerial: ->
+    name = 'Set text benchmark: template bindings serial'
+    root = atom.views.getView(atom.workspace)
+
+    model = new BenchmarkModel()
+    element = atom.views.getView(model)
+    root.appendChild(element)
+    element.rootTemplate.setModelFn_()
+
+    n = 1000
+    numChanges = 0
+    Object.observe model, (changes) ->
+      numChanges += changes.length
+      endIt() if numChanges >= n
+      next()
+
+    next = ->
+      element.updateText()
+
+    endIt = ->
+      console.timeEnd(name)
+      root.removeChild(element)
+
+    console.time(name)
+    next()
